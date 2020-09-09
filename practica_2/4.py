@@ -2,9 +2,27 @@
 por teclado el sueldo de un empleado y 
 le aplique los cálculos de ISR (ver tabla DGII), 
 ARS, y AFP (investigar porcentajes)"""
-sueldo = input("sueldo: ")
+top1 = 416220.00
+top2 = 624329.00
+top3 = 867123.00
+sueldo = (float(input("ingrese su sueldo: ")))
+salario_anual = sueldo * 12
+isr = 0;
+ 
+if salario_anual <= top1:
+    print("excenta")  
+elif salario_anual <= top2:
+    excedente = salario_anual - top1
+    isr = excedente * 0.15
+elif salario_anual <= top3:
+    excedente = salario_anual - top2
+    isr = 31216.00 + (excedente * 0.20)
+else:
+    excedente = salario_anual - top3
+isr = 79776.00 + excedente * 0.25
+print("irs valor anual: " ,isr)
+print ("irs valor mensual: " , isr / 12)
 afp = sueldo * 0.0287
-print(afp)
-"""Siguiendo el ejemplo si tu salario es de RD$21.000,
- lo único que debes hacer es multiplicar por 2.87% o lo que es igual, por 0.0287:
-RD$21.000 x 0.0287 = RD$602,70"""
+print("AFP: ", afp )
+ars = sueldo * 0.304
+print ("ARS: ", ars)
