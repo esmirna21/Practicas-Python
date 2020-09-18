@@ -14,7 +14,7 @@ def multiple(valor, multiple):
  
 
 
-multiples_5=[]
+multiples_5 =[]
  
 for i in range(1,1001):
     if multiple(i,5):
