@@ -1,4 +1,4 @@
- 
+#OPCION 1
 import sqlite3
 conn = sqlite3.connect("agendatelefonica.db")
 cursor = conn.cursor()
@@ -93,21 +93,21 @@ while True:
   c = int(input("Digite su opcion: "))
   if c == 1:
     while True:
-      nombre = input("nombre : ")
+      nombre = input("Nombre : ")
       apellido = input("Nombre del Apellido : ")
       numero = input("Numero del contacto: ")
-      insertar()
+      insertar()  
       print("desea agregar otro ?")
       print("1- si")
       print("2- no")
       si= int(input("digite una opcion: "))
-      if si == 2: 
+      if si == 2:
         break
   if c == 2:
     listar()
     t = input("volver al menu: ")
   if c == 3:
-    d = input("Digite ID que desea ver: ")
+    d = int(input("Digite ID que desea ver: "))
     listarID()
     t = input("volver al menu: ")
   if c == 4:
@@ -135,14 +135,14 @@ while True:
     if m == 3:
       listar()
       num = input("numero a modificar: ")
-      d = int("ID del campo a modificar: ")
+      d = int (input("ID del campo a modificar: "))
       modificarnumero()
       t = input("volver al menu: ")
   if c == 6:
     print("1- Buscar nombre")
     print("2- Buscar numero")
     b = int(input("Digite una opcion: "))
-    if b == 1:
+    if b == 1  :
       nombre = input("buscar nombre: ")
       buscarnombre()
       t = input("volver al menu: ")
@@ -150,6 +150,5 @@ while True:
       numero = input("buscar numero: ")
       buscartelefono()
       t = input("volver al menu: ")
-  if c == 7 :
+  if c == 7:
     break
-conn.close()
