@@ -1,3 +1,4 @@
+ 
 import sqlite3
 conn = sqlite3.connect("agendatelefonica.db")
 cursor = conn.cursor()
@@ -18,7 +19,8 @@ def listar():
   cursor.execute(query1)
   rows = cursor.fetchall()
   for row in rows:
-    print(row)
+    print("ID: ", row[0],"NOMBRE: ", row[1],"APELLIDO: ", row[2],"NUMERO: ", row[3])
+    row = cursor.fetchall()
 
 
 def listarID():
@@ -26,7 +28,10 @@ def listarID():
   cursor.execute("SELECT * FROM contactos where ID  = (?)",(d))
   rows = cursor.fetchone()
   for row in rows:
-    print(row)
+    print("ID: ", row[0])
+    print("Nombre: ", row[1])
+    print("Apellido: ", row[2])
+    print("Numero: ", row[3])
     row = cursor.fetchone()
 
 def eliminar ():
@@ -35,18 +40,27 @@ def eliminar ():
   conn.commit()
 
 def buscarnombre():
-  cursor.execute("SELECT * FROM contactos where nombre like  ? ",('%'+nombre+'%'))
-  rows = cursor.fetchone()
+  cursor = conn.cursor()
+  querynombre= "SELECT * FROM contactos where nombre like '%{}%'"
+  cursor.execute(querynombre.format(nombre,))
+  rows = cursor.fetchall()
   for row in rows:
-    print(row)
-    row = cursor.fetchone()
+    print("ID: ", row[0])
+    print("Nombre: ", row[1])
+    print("Apellido: ", row[2])
+    print("Numero: ", row[3])
+    row = cursor.fetchall()
 
 def buscartelefono():
-  cursor.execute("SELECT * FROM contactos where numero like  ?",(numero))
-  rows = cursor.fetchone()
+  querynum= "SELECT * FROM contactos where numero like '%{}%'"
+  cursor.execute(querynum.format(numero,))
+  rows = cursor.fetchall()
   for row in rows:
-    print(row)
-    row = cursor.fetchone()
+    print("ID: ", row[0])
+    print("Nombre: ", row[1])
+    print("Apellido: ", row[2])
+    print("Numero: ", row[3])
+    row = cursor.fetchall()
 
 def modificarnombre():
   cursor = conn.cursor()
@@ -78,11 +92,17 @@ while True:
   menu()
   c = int(input("Digite su opcion: "))
   if c == 1:
-    nombre = input("nombre : ")
-    apellido = input("Nombre del Apellido : ")
-    numero = input("Numero del contacto: ")
-    insertar()
-    t = input("volver al menu: ")
+    while True:
+      nombre = input("nombre : ")
+      apellido = input("Nombre del Apellido : ")
+      numero = input("Numero del contacto: ")
+      insertar()
+      print("desea agregar otro ?")
+      print("1- si")
+      print("2- no")
+      si= int(input("digite una opcion: "))
+      if si == 2: 
+        break
   if c == 2:
     listar()
     t = input("volver al menu: ")
@@ -97,13 +117,14 @@ while True:
   if c == 5:
     print("1- Modificar nombre")
     print("2- Modificar apellido")
-    print("2- Modificar numero")
+    print("3- Modificar numero")
     m = int(input("Digite una opcion:"))
     if m == 1:
       listar()
       n = input("Nombre a modificar: ")
       d = int(input("ID del campo a modificar: "))
       modificarnombre()
+      print("Nombre cambiado exitosamente ")
       t = input("volver al menu: ")
     if m ==2 :
       listar()
@@ -126,13 +147,9 @@ while True:
       buscarnombre()
       t = input("volver al menu: ")
     if b ==2:
-      numero = int(input("buscar numero: "))
+      numero = input("buscar numero: ")
       buscartelefono()
       t = input("volver al menu: ")
   if c == 7 :
     break
-
-
-
-
 conn.close()
